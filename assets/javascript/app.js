@@ -1,44 +1,108 @@
-//Start the game automatically
-window.onload = function() {
-  $("#lap").on("click", stopwatch.recordLap);
-  $("#stop").on("click", stopwatch.stop);
-  $("#reset").on("click", stopwatch.reset);
-  $("#start").on("click", stopwatch.start);
-};
-
 //global game variables
-var gameQuestionsToAsk = [];
+var timerDisplay = 6; //countdown will start at 5
+var counterCorrect = 0; //questions answered correctly
+var counterIncorrect = 0; //questions answered incorrectly
 
-$(".gameAnswerButton").on("click", function() {
-	alert($(this).val());
-//stop timer
+window.onload = function() {
+	setTimeout(gameStartMessage1,1000*2);
+	setTimeout(gameStartMessage2,1000*3);
+	setTimeout(gameStartMessage3,1000*4);
+	setTimeout(gameStart,1000*5);
+}
 
-//check answers
+function gameStartMessage1() {
+	$('#gameMessage').html("Ready...");
+}
 
-//start second timer to display next question
-});
+function gameStartMessage2() {
+	$('#gameMessage').html("Set...");
+}
 
-$("#gamePlay").on("click", function() {
-	alert($(this).val());
-	$('#gameMessage').text("Click to answer the following question before the timer runs out...");
-	$('#gameIncorrect').text("Incorrect: 2");
-	$('#gameTimeRemaining').text(":00");
-	$('#gameCorrect').text("Correct: 3");
-	$('.gameAnswerButton').show();
-	// multiple and true/false
+function gameStartMessage3() {
+	$('#gameMessage').html("Go!!!");
+}
+
+function gameTimerStop() {
+	clearInterval(intervalId);
+	$('#gameTimeRemaining').html("");
+}
+
+function gameTimerStart() {
+	//update time remaining every second
+	intervalId = setInterval(gameCountdown, 1000);
+}
+
+function gameCountdown() {
+	//every second countdown the timer
+	timerDisplay --;
+	$('#gameTimeRemaining').html(timerDisplay);
+	//if timer runs out, send to incorrect function
+	if (timerDisplay === 0) {
+		gameTimerStop();
+		gameIncorrectAnswer(true); //did question timeout? true
+	}
+}
+
+function gameStart () {
+	//display next question
+	$('#gameMessage').html("");
+	displayNextQuestion();
+	timerDisplay = 6;
+	gameTimerStart();
+}
+
+function displayNextQuestion () {
 	$('#gameQuestionDisplay').text("This is a question?");
+	$('#gameButton1').show();
 	$('#gameButton1').text("True button text True button text True button text True button text True button text True button text True button text");
+	$('#gameButton2').show();
 	$('#gameButton2').text("False button text False button text False button text False button text False button text False button text");
 	// multiple
 	$('#gameButton3').show();
 	$('#gameButton3').text("button three text button three text button three text button three text button three text");
 	$('#gameButton4').show();
 	$('#gameButton4').text("button four text button four text button four text button four text button four text button four text");
-// true/false
-// $('#gameButton3').hide();
-// $('#gameButton4').hide();
+}
+
+
+$(".gameAnswerButton").on("click", function() {
+
+alert($(this).val());
+		//stop timer
+		gameTimerStop();
+		//check answers
+		if ($(this).val() == 1) {
+			gameCorrectAnswer();
+		} else {
+			gameIncorrectAnswer(false); //did question timeout? false
+		};
 });
 
+function gameCorrectAnswer() {
+	counterCorrect++;
+	$('#gameCorrect').html("Correct: " + counterCorrect);
+	$('#gameMessage').html("Great! That is correct.");
+	$('.gameAnswerButton').hide();
+	//Display the correct answer...
+	$('#gameButton0').show();
+	$('#gameButton0').text("This is the correct answer displayed.");
+	setTimeout(gameStart,1000*3); //show correct answer for several seconds
+} 
+
+function gameIncorrectAnswer(timeOut) {
+	counterIncorrect++;
+	$('#gameIncorrect').html("Incorrect: " + counterIncorrect);	
+	if (timeOut) {
+			$('#gameMessage').html("Time's up! Missed answers count as incorrect...");
+		} else {
+			$('#gameMessage').html("Too bad. That is incorrect. The correct answer is...");
+		}
+	$('.gameAnswerButton').hide();
+	//Display the correct answer...
+	$('#gameButton0').show();
+	$('#gameButton0').text("This is the correct answer displayed.");
+	setTimeout(gameStart,1000*3);  //show correct answer for several seconds
+}
 
 
 //a start button is displayed - on reset the button becomes replay
@@ -68,10 +132,6 @@ $("#gamePlay").on("click", function() {
 //display replay button
 //$("#gameReset").show();
 
-
-//code snippets to use?
-//    $("#gameReplay").on("click", ReplayGame);
-//    $("#gamePlay").on("click", playGame);
 
 // code function to check if user selects an answer choice 
 // the answers will have a value to be used as index in the answer check

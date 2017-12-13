@@ -132,21 +132,22 @@ var gameQuestionsAvailable = [
 
 // #gameDisplay create the divs and then apply the css to them. The game execution updates the content.
 $('#gameDisplay').append("<div id='gameTitle' class='text-center'><h1>Play Trivia!</h1></div>");
-$('#gameDisplay').append("<div id='gameMessage' class='text-center'>Click to begin: <button id='gamePlay' value='play'>Play Trivia</button></div>");
-$('#gameDisplay').append("<div id='gameQuestionDisplay' class='text-center'></div>");
 $('#gameDisplay').append("<div class='row'><div id='gameIncorrect' class='col-md-4 text-right'></div><div id='gameTimeRemaining' class='col-md-4 text-center'></div><div id='gameCorrect' class='col-md-4 text-left'></div>");
+$('#gameDisplay').append("<div id='gameQuestionDisplay' class='text-center'></div>");
+$('#gameDisplay').append("<div id='gameMessage' class='text-center'>Game will start automatically.</div>");
 $('#gameDisplay').append("<div id='gameChoicesDisplay' class='text-center'></div>");
 $('#gameChoicesDisplay').append("<button id='gameButton1' class='gameAnswerButton' value='1'></button>");
 $('#gameChoicesDisplay').append("<button id='gameButton2' class='gameAnswerButton' value='2'></button>");
 $('#gameChoicesDisplay').append("<button id='gameButton3' class='gameAnswerButton' value='3'></button>");
 $('#gameChoicesDisplay').append("<button id='gameButton4' class='gameAnswerButton' value='4'></button>");
+$('#gameChoicesDisplay').append("<button id='gameButton0' class='gameAnswerButton' value='0' disabled></button>");
 $('.gameAnswerButton').hide();
 // apply CSS
 $('#gameTitle').css({"color": "blue", "background-color": "lightblue", "border": "solid 9px blue", "padding": "18px"});
-$('#gameMessage').css({"color": "blue", "font-size": "28px", "height": "56px", "padding": "18px"});
-$('#gameQuestionDisplay').css({"color": "black", "font-size": "28px", "font-weight": "bold", "padding": "18px"});
-$('#gameIncorrect').css({"color": "black", "font-size": "18px", "height": "36px"});
-$('#gameTimeRemaining').css({"color": "red", "font-size": "24px", "height": "36px"});
-$('#gameCorrect').css({"color": "black", "font-size": "18px", "height": "36px"});
+$('#gameIncorrect').css({"color": "black", "font-size": "18px", "margin-top": "28px", "height": "36px"});
+$('#gameTimeRemaining').css({"color": "red", "font-size": "24px", "margin-top": "28px", "height": "36px"});
+$('#gameCorrect').css({"color": "black", "font-size": "18px", "margin-top": "28px", "height": "36px"});
+$('#gameQuestionDisplay').css({"color": "black", "margin-top": "28px", "font-size": "28px", "font-weight": "bold", "padding": "18px"});
+$('#gameMessage').css({"color": "darkblue", "font-size": "28px", "height": "56px", "margin": "12px"});
 $('#gameChoicesDisplay').css({"color": "blue", "font-size": "24px", "width": "66%", "margin":"auto"});
 $('.gameAnswerButton').css({"padding": "12px", "margin": "6px", "width": "100%"});
