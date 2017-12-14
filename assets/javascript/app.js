@@ -1,7 +1,13 @@
 //global game variables
-var timerDisplay = 6; //countdown will start at 5
+var timerDisplay = 4; //countdown will start at 5
 var counterCorrect = 0; //questions answered correctly
 var counterIncorrect = 0; //questions answered incorrectly
+var counterQuestion = 0;
+var gameQuestionToDisplay = "";
+var gameCorrectAnswer = "";
+var gameQuestionType = "";
+var gameAnswers = [];
+var booleanLastQuestion = false; //used to test completion of questions
 
 window.onload = function() {
 	setTimeout(gameStartMessage1,1000*2);
@@ -39,96 +45,118 @@ function gameCountdown() {
 	//if timer runs out, send to incorrect function
 	if (timerDisplay === 0) {
 		gameTimerStop();
-		gameIncorrectAnswer(true); //did question timeout? true
+		gameAnswerIncorrect(false); //answer not incorrect - just timed out
 	}
 }
 
 function gameStart () {
-	//display next question
+	//clear game message and hide correct answer
 	$('#gameMessage').html("");
+	$('#gameButton0').hide(); //correct answer
+
+	//Get data from the next question in array 
+	gameQuestionToDisplay = gameQuestionsAvailable[counterQuestion].question;
+	gameCorrectAnswer = gameQuestionsAvailable[counterQuestion].correct_answer;
+	gameQuestionType = gameQuestionsAvailable[counterQuestion].type;
+	gameAnswers = gameQuestionsAvailable[counterQuestion].incorrect_answers;
+
+	//randomly insert correct answer into list of choices
+	if (gameQuestionType == "multiple") {
+		gameCorrectAnswerIndex = Math.floor((Math.random() * 4));
+	} else {
+		//else true and false
+		gameCorrectAnswerIndex = Math.floor((Math.random() * 2));
+		};
+	//insert into indexed position
+	gameAnswers.splice(gameCorrectAnswerIndex, 0, gameCorrectAnswer);
+
+console.log(gameCorrectAnswerIndex + " " + gameAnswers);
+
+	//prepare for next question - this funcion not used if at end of array
+	counterQuestion++;
+	booleanLastQuestion = counterQuestion == gameQuestionsAvailable.length;
+	//display the question selected
 	displayNextQuestion();
-	timerDisplay = 6;
+	timerDisplay = 4;
 	gameTimerStart();
 }
 
 function displayNextQuestion () {
-	$('#gameQuestionDisplay').text("This is a question?");
+	$('#gameQuestionDisplay').html(gameQuestionToDisplay);
 	$('#gameButton1').show();
-	$('#gameButton1').text("True button text True button text True button text True button text True button text True button text True button text");
+	$('#gameButton1').text(gameAnswers[0]);
 	$('#gameButton2').show();
-	$('#gameButton2').text("False button text False button text False button text False button text False button text False button text");
-	// multiple
-	$('#gameButton3').show();
-	$('#gameButton3').text("button three text button three text button three text button three text button three text");
-	$('#gameButton4').show();
-	$('#gameButton4').text("button four text button four text button four text button four text button four text button four text");
+	$('#gameButton2').text(gameAnswers[1]);
+	if (gameQuestionType == "multiple") {
+		$('#gameButton3').show();
+		$('#gameButton3').text(gameAnswers[2]);
+		$('#gameButton4').show();
+		$('#gameButton4').text(gameAnswers[3]);
+	//else true and false	
+	} else {
+		$('#gameButton3').hide();
+		$('#gameButton4').hide();
+	}
 }
 
-
 $(".gameAnswerButton").on("click", function() {
-
-alert($(this).val());
 		//stop timer
 		gameTimerStop();
-		//check answers
-		if ($(this).val() == 1) {
-			gameCorrectAnswer();
+		//check answers - the answer index is 1 less than the button values
+		if ($(this).val() == gameCorrectAnswerIndex + 1) {
+			gameAnswerCorrect();
 		} else {
-			gameIncorrectAnswer(false); //did question timeout? false
+			gameAnswerIncorrect(true); //answer was incorrect
 		};
 });
 
-function gameCorrectAnswer() {
+function gameAnswerCorrect() {
 	counterCorrect++;
 	$('#gameCorrect').html("Correct: " + counterCorrect);
 	$('#gameMessage').html("Great! That is correct.");
 	$('.gameAnswerButton').hide();
 	//Display the correct answer...
 	$('#gameButton0').show();
-	$('#gameButton0').text("This is the correct answer displayed.");
-	setTimeout(gameStart,1000*3); //show correct answer for several seconds
+	$('#gameButton0').text(gameCorrectAnswer);
+	// gameCompleteCheck()
+	setTimeout(gameCompleteCheck,1000*3);  //show correct answer for several seconds				
 } 
 
-function gameIncorrectAnswer(timeOut) {
+function gameAnswerIncorrect(gameAnsweredIncorrect) {
 	counterIncorrect++;
 	$('#gameIncorrect').html("Incorrect: " + counterIncorrect);	
-	if (timeOut) {
-			$('#gameMessage').html("Time's up! Missed answers count as incorrect...");
-		} else {
+	if (gameAnsweredIncorrect) {
 			$('#gameMessage').html("Too bad. That is incorrect. The correct answer is...");
-		}
+		} else {
+			$('#gameMessage').html("Time's up! Missed answers count as incorrect...");
+		};
 	$('.gameAnswerButton').hide();
 	//Display the correct answer...
 	$('#gameButton0').show();
-	$('#gameButton0').text("This is the correct answer displayed.");
-	setTimeout(gameStart,1000*3);  //show correct answer for several seconds
+	$('#gameButton0').text(gameCorrectAnswer);
+	// gameCompleteCheck()
+	setTimeout(gameCompleteCheck,1000*3);  //show correct answer for several seconds				
+
+}
+
+function gameCompleteCheck() {
+
+	//was this the last question
+	if (booleanLastQuestion) {
+		//finish game
+		$('#gameButton0').hide();
+		$('#gameQuestionDisplay').html("");
+		if (counterIncorrect > counterCorrect) {
+			$('#gameMessage').html("Sorry but you lost.");	
+		} else {
+			$('#gameMessage').html("You won!!!");
+		}
+	} else {
+		gameStart();  //go to another question				
+	};
 }
 
 
-//a start button is displayed - on reset the button becomes replay
-
-
-//Start game play
-//read and display first game question
-//game question to ask is array [0]=answer, [1]=question, [2].[0-4]=choices
-//  the array for true/false with a false answer will be: false, question, true, false, null, null, null
-//timer begins after question is displayed
-
-//if user chooses then timer is stopped
-//correct++
-//if timer expires than  
-//unanswered++ incorrect++  
-//
-//no more questions
-//
-//if correct > incorrect then WIN else LOSE
-//
-//display WIN
-//$('#gameMessage').html("You Won!!!");
-
-//display LOSE
-//$('#gameMessage').html("You lost!");
-//
 //display replay button
 //$("#gameReset").show();
 
