@@ -1,15 +1,20 @@
 //global game variables
-var timerDisplay = 4; //countdown will start at 5
+var timerDisplay = 6; //countdown will start at 5
 var counterCorrect = 0; //questions answered correctly
 var counterIncorrect = 0; //questions answered incorrectly
-var counterQuestion = 0;
-var gameQuestionToDisplay = "";
-var gameCorrectAnswer = "";
-var gameQuestionType = "";
-var gameAnswers = [];
+var counterQuestion = 0; //keep track through array of questions
+var gameQuestionToDisplay = ""; //will be the displayed question
+var gameCorrectAnswer = ""; //will be the correct answer for question
+var gameQuestionType = ""; //will be multiple or boolean (multiple choice / true and false)
+var gameAnswers = []; //will be an array of incorrect answers
 var booleanLastQuestion = false; //used to test completion of questions
 
+//following will display ready...set...go!!! before the game starts
 window.onload = function() {
+	gameDisplayStartMessages()
+}
+
+function gameDisplayStartMessages() {
 	setTimeout(gameStartMessage1,1000*2);
 	setTimeout(gameStartMessage2,1000*3);
 	setTimeout(gameStartMessage3,1000*4);
@@ -77,7 +82,7 @@ console.log(gameCorrectAnswerIndex + " " + gameAnswers);
 	booleanLastQuestion = counterQuestion == gameQuestionsAvailable.length;
 	//display the question selected
 	displayNextQuestion();
-	timerDisplay = 4;
+	timerDisplay = 6;
 	gameTimerStart();
 }
 
@@ -145,58 +150,29 @@ function gameCompleteCheck() {
 	if (booleanLastQuestion) {
 		//finish game
 		$('#gameButton0').hide();
-		$('#gameQuestionDisplay').html("");
+		$('#gameQuestionDisplay').html("");		
 		if (counterIncorrect > counterCorrect) {
 			$('#gameMessage').html("Sorry but you lost.");	
 		} else {
 			$('#gameMessage').html("You won!!!");
 		}
+		//display replay button
+		$('#gameMessage').append("<br><button id='gamePlay'>Play Again</button>");
+		$('#gamePlay').css({"padding": "12px", "margin": "12px", "width": "20%"});
 	} else {
 		gameStart();  //go to another question				
 	};
 }
 
-
-//display replay button
-//$("#gameReset").show();
-
-
-// code function to check if user selects an answer choice 
-// the answers will have a value to be used as index in the answer check
-//   $(".answerChoice").on("click", function() {
-//		   	whatchoice = $(this).val();
-	//code to check if the choice is right or wrong
-	// replace the text of an already displayed html line
-//   $("#second-number").text(secondNumber);
-//   }
-
-// ************* Taking too long - removed randomize and rebuild **************
-//Function to build and return a random array of five questions for game play
-//This is called when game play starts and resets
-//create an array of unique random numbers
-// function randomQuestionsToAsk(gameQuestionsAvailable) {
-// 	var tempNumber = 0;
-// 	var tempArray = [];
-// 	for (var i = 0; i < 5; i++) {
-// 		do {tempNumber = Math.floor((Math.random() * gameQuestionsAvailable.length) + 1);
-// 		} while(tempArray.includes(tempNumber))
-// 		tempArray.push(tempNumber); //add unique number to array
-// 	};
-// 	//OLD build array for play
-// 	// for (i = 0; i < 5; i++) {
-// 	// 	gameQuestionsToAsk.push(gameQuestionsAvailable[tempArray[i]])
-// 	// };
-
-// 	//build array for play
-// 	gameQuestionsToAsk[i].correct_answer = gameQuestionsAvailable[tempArray[i]].correct_answer;
-// 	gameQuestionsToAsk[i].question = gameQuestionsAvailable[tempArray[i]].question;
-// 	if (gameQuestionsAvailable[i].type="boolean") {
-// 		gameQuestionsToAsk[i].all_answers[] = "true","false";
-// 	}
-// 	else if (gameQuestionsAvailable[i].type="multiple") {
-// 		gameQuestionsToAsk[i].all_answers[] = gameQuestionsAvailable[tempArray[i]].incorrect_answers;
-// 	};
-// 	//insert the correct answer into a random position
-// 	var tempNumber = Math.floor((Math.random() * 4));
-// 	gameQuestionsToAsk[i].all_answers.splice(tempNumber,0,gameQuestionsAvailable[tempArray[i]].correct_answer);
-// }
+$("#gamePlay").on("click", function() {
+// console.log("reset game");
+	timerDisplay = 6;
+	counterCorrect = 0;
+	counterIncorrect = 0;
+	counterQuestion = 0;
+	gameQuestionToDisplay = "";
+	gameCorrectAnswer = "";
+	gameAnswers = [];
+	booleanLastQuestion = false;
+	gameDisplayStartMessages();
+});

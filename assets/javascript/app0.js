@@ -1,100 +1,100 @@
 var gameQuestionsAvailable = [
-{
-"category": "Entertainment: Musicals & Theatres",
-"type": "multiple",
-"difficulty": "medium",
-"question": "When was the play &#039;Macbeth&#039; written?",
-"correct_answer": "1606",
-"incorrect_answers": [
-"1605",
-"1723",
-"1628"
-]
-},
-{
-"category": "Entertainment: Video Games",
-"type": "multiple",
-"difficulty": "medium",
-"question": "When was the original Star Wars: Battlefront II released?",
-"correct_answer": "October 31, 2005",
-"incorrect_answers": [
-"December 18, 2004",
-"November 21, 2006",
-"September 9, 2007"
-]
-},
-{
-"category": "Entertainment: Music",
-"type": "multiple",
-"difficulty": "medium",
-"question": "What French artist/band is known for playing on the midi instrument &quot;Launchpad&quot;?",
-"correct_answer": "Madeon",
-"incorrect_answers": [
-"Daft Punk ",
-"Disclosure",
-"David Guetta"
-]
-},
-{
-"category": "Sports",
-"type": "multiple",
-"difficulty": "medium",
-"question": "At which bridge does the annual Oxford and Cambridge boat race start?",
-"correct_answer": "Putney",
-"incorrect_answers": [
-"Hammersmith",
-"Vauxhall ",
-"Battersea"
-]
-},
-{
-"category": "Entertainment: Film",
-"type": "multiple",
-"difficulty": "medium",
-"question": "Velma Kelly and Roxie Hart are the protagonists of which Oscar winning movie?",
-"correct_answer": "Chicago",
-"incorrect_answers": [
-"Dreamgirls",
-"Cabaret",
-"All That Jazz"
-]
-},
-{
-"category": "Science & Nature",
-"type": "multiple",
-"difficulty": "medium",
-"question": "The humerus, paired radius, and ulna come together to form what joint?",
-"correct_answer": "Elbow",
-"incorrect_answers": [
-"Knee",
-"Sholder",
-"Ankle"
-]
-},
-{
-"category": "Science: Mathematics",
-"type": "multiple",
-"difficulty": "medium",
-"question": "What are the first 6 digits of the number &quot;Pi&quot;?",
-"correct_answer": "3.14159",
-"incorrect_answers": [
-"3.14169",
-"3.12423",
-"3.25812"
-]
-},
-{
-"category": "Entertainment: Music",
-"type": "multiple",
-"difficulty": "medium",
-"question": "The song &quot;Twin Size Mattress&quot; was written by which band?",
-"correct_answer": "The Front Bottoms",
-"incorrect_answers": [
-"Twenty One Pilots",
-"The Wonder Years",
-"The Smith Street Band"
-]
-},
+// {
+// "category": "Entertainment: Musicals & Theatres",
+// "type": "multiple",
+// "difficulty": "medium",
+// "question": "When was the play &#039;Macbeth&#039; written?",
+// "correct_answer": "1606",
+// "incorrect_answers": [
+// "1605",
+// "1723",
+// "1628"
+// ]
+// },
+// {
+// "category": "Entertainment: Video Games",
+// "type": "multiple",
+// "difficulty": "medium",
+// "question": "When was the original Star Wars: Battlefront II released?",
+// "correct_answer": "October 31, 2005",
+// "incorrect_answers": [
+// "December 18, 2004",
+// "November 21, 2006",
+// "September 9, 2007"
+// ]
+// },
+// {
+// "category": "Entertainment: Music",
+// "type": "multiple",
+// "difficulty": "medium",
+// "question": "What French artist/band is known for playing on the midi instrument &quot;Launchpad&quot;?",
+// "correct_answer": "Madeon",
+// "incorrect_answers": [
+// "Daft Punk ",
+// "Disclosure",
+// "David Guetta"
+// ]
+// },
+// {
+// "category": "Sports",
+// "type": "multiple",
+// "difficulty": "medium",
+// "question": "At which bridge does the annual Oxford and Cambridge boat race start?",
+// "correct_answer": "Putney",
+// "incorrect_answers": [
+// "Hammersmith",
+// "Vauxhall ",
+// "Battersea"
+// ]
+// },
+// {
+// "category": "Entertainment: Film",
+// "type": "multiple",
+// "difficulty": "medium",
+// "question": "Velma Kelly and Roxie Hart are the protagonists of which Oscar winning movie?",
+// "correct_answer": "Chicago",
+// "incorrect_answers": [
+// "Dreamgirls",
+// "Cabaret",
+// "All That Jazz"
+// ]
+// },
+// {
+// "category": "Science & Nature",
+// "type": "multiple",
+// "difficulty": "medium",
+// "question": "The humerus, paired radius, and ulna come together to form what joint?",
+// "correct_answer": "Elbow",
+// "incorrect_answers": [
+// "Knee",
+// "Sholder",
+// "Ankle"
+// ]
+// },
+// {
+// "category": "Science: Mathematics",
+// "type": "multiple",
+// "difficulty": "medium",
+// "question": "What are the first 6 digits of the number &quot;Pi&quot;?",
+// "correct_answer": "3.14159",
+// "incorrect_answers": [
+// "3.14169",
+// "3.12423",
+// "3.25812"
+// ]
+// },
+// {
+// "category": "Entertainment: Music",
+// "type": "multiple",
+// "difficulty": "medium",
+// "question": "The song &quot;Twin Size Mattress&quot; was written by which band?",
+// "correct_answer": "The Front Bottoms",
+// "incorrect_answers": [
+// "Twenty One Pilots",
+// "The Wonder Years",
+// "The Smith Street Band"
+// ]
+// },
 {
 "category": "Entertainment: Video Games",
 "type": "multiple",
