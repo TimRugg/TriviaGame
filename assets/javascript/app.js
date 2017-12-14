@@ -1,3 +1,27 @@
+//Setup the HTML and Style
+// #gameDisplay create the divs and then apply the css to them. The game execution updates the content.
+$('#gameDisplay').append("<div id='gameTitle' class='text-center'><h1>Play Trivia!</h1></div>");
+$('#gameDisplay').append("<div class='row'><div id='gameIncorrect' class='col-md-4 text-right'></div><div id='gameTimeRemaining' class='col-md-4 text-center'></div><div id='gameCorrect' class='col-md-4 text-left'></div>");
+$('#gameDisplay').append("<div id='gameQuestionDisplay' class='text-center'></div>");
+$('#gameDisplay').append("<div id='gameMessage' class='text-center'>Game will start automatically.</div>");
+$('#gameDisplay').append("<div id='gameChoicesDisplay' class='text-center'></div>");
+$('#gameChoicesDisplay').append("<button id='gameButton1' class='gameAnswerButton' value='1'></button>");
+$('#gameChoicesDisplay').append("<button id='gameButton2' class='gameAnswerButton' value='2'></button>");
+$('#gameChoicesDisplay').append("<button id='gameButton3' class='gameAnswerButton' value='3'></button>");
+$('#gameChoicesDisplay').append("<button id='gameButton4' class='gameAnswerButton' value='4'></button>");
+$('#gameChoicesDisplay').append("<button id='gameButton0' class='gameAnswerButton' value='0' disabled></button>");
+$('.gameAnswerButton').hide();
+// apply CSS
+$('*').css({"font-family": "Audiowide, cursive"});
+$('#gameTitle').css({"color": "blue", "background-color": "lightblue", "border": "solid 9px blue", "padding": "18px"});
+$('#gameIncorrect').css({"color": "black", "font-size": "22px", "margin-top": "28px", "height": "36px"});
+$('#gameTimeRemaining').css({"color": "red", "font-size": "24px", "margin-top": "28px", "height": "36px"});
+$('#gameCorrect').css({"color": "black", "font-size": "22px", "margin-top": "28px", "height": "36px"});
+$('#gameQuestionDisplay').css({"color": "black", "margin-top": "28px", "font-size": "28px", "font-weight": "bold", "padding": "18px"});
+$('#gameMessage').css({"color": "darkblue", "font-size": "28px", "height": "56px", "margin": "12px"});
+$('#gameChoicesDisplay').css({"color": "blue", "font-size": "24px", "width": "66%", "margin":"auto"});
+$('.gameAnswerButton').css({"padding": "12px", "margin": "6px", "width": "100%"});
+
 //global game variables
 var timerDisplay = 6; //countdown will start at 5
 var counterCorrect = 0; //questions answered correctly
@@ -8,6 +32,7 @@ var gameCorrectAnswer = ""; //will be the correct answer for question
 var gameQuestionType = ""; //will be multiple or boolean (multiple choice / true and false)
 var gameAnswers = []; //will be an array of incorrect answers
 var booleanLastQuestion = false; //used to test completion of questions
+// gameQuestionsAvailable[] is in app0.js
 
 //following will display ready...set...go!!! before the game starts
 window.onload = function() {
@@ -75,7 +100,7 @@ function gameStart () {
 	//insert into indexed position
 	gameAnswers.splice(gameCorrectAnswerIndex, 0, gameCorrectAnswer);
 
-console.log(gameCorrectAnswerIndex + " " + gameAnswers);
+// console.log(gameCorrectAnswerIndex + " " + gameAnswers);
 
 	//prepare for next question - this funcion not used if at end of array
 	counterQuestion++;
@@ -87,6 +112,7 @@ console.log(gameCorrectAnswerIndex + " " + gameAnswers);
 }
 
 function displayNextQuestion () {
+	$('#gameTimeRemaining').html(5);
 	$('#gameQuestionDisplay').html(gameQuestionToDisplay);
 	$('#gameButton1').show();
 	$('#gameButton1').text(gameAnswers[0]);
